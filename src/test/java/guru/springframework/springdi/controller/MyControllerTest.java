@@ -2,8 +2,6 @@ package guru.springframework.springdi.controller;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MyControllerTest {
 
     @Test
