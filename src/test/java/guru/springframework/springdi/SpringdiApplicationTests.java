@@ -1,13 +1,13 @@
-package guru.springframework.spring6di;
+package guru.springframework.springdi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Spring6DiApplicationTests {
+class SpringdiApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }
