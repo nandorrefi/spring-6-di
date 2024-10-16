@@ -1,19 +1,14 @@
 package guru.springframework.springdi.controller;
 
-import guru.springframework.springdi.services.GreetingServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest // loads spring context
 class ConstructorInjectedControllerTest {
 
+    @Autowired
     ConstructorInjectedController constructorInjectedController;
-
-    @BeforeEach
-    void setUp() {
-        constructorInjectedController = new ConstructorInjectedController(new GreetingServiceImpl());   // class requires the GreetingService property to be set
-    }
 
     @Test
     void sayHello() {

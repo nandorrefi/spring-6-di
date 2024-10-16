@@ -1,20 +1,14 @@
 package guru.springframework.springdi.controller;
 
-import guru.springframework.springdi.services.GreetingServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest
 class PropertyInjectedControllerTest {
 
+    @Autowired
     PropertyInjectedController propertyInjectedController;
-
-    @BeforeEach
-    void setUp() {
-        propertyInjectedController = new PropertyInjectedController();
-        propertyInjectedController.greetingService = new GreetingServiceImpl(); // if we don't set property, we'll receive NPE
-    }
 
     @Test
     void sayHello() {
