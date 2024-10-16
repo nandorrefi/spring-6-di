@@ -58,3 +58,49 @@ Got a question about your Spring Framework 6 course? [Checkout these FAQs!](http
 * Like Spring Framework Guru on [Facebook](https://www.facebook.com/springframeworkguru/)
 * Follow Spring Framework Guru on [Twitter](https://twitter.com/spring_guru)
 * Connect with John Thompson on [LinkedIn](http://www.linkedin.com/in/springguru)
+
+# Notes
+
+## Basics of Dependency Injection
+
+### Dependency Injection
+DI is where a needed dependency is injected by another object/component/program.
+
+Usually can be done via setter/constructor/property
+
+The class that gets injected does not need to create instances of its dependencies.
+
+
+Types of DI in Spring:
+* Can use public or private properties
+  * Using private properties is BAD PRACTICE, Spring uses reflection to set these properties which is slow and makes testing difficult
+    * Personal note: testing part is arguable since mockito can inject mocks into private properties too, so testing won't become more difficult. Although it does impact performance of the unit tests.
+* Setters are debated
+* Constructors are most preferred
+
+Classes vs Interfaces:
+* DI can be done with concrete classes or with interfaces
+* Generally avoid DI with concrete classes
+  * allows runtime to decide implementation 
+  * more SOLID (Interface segregation principle)
+  * makes code more testable
+
+### Inversion of Control (IoC)
+
+This technique allows dependencies to be injected at runtime
+
+IoC allows the framework to compose the application by controlling which implementation is injected
+* example: H2 in memory db or MySQL db
+
+Essentially, you only have to write the application itself and not the framework, because the control of the dependencies is in hands of the framework.
+
+TL;DR:
+* DI: You compose your classes with DI in mind, you might perform injections yourself.
+* IoC: Control of dependency injection is handed (inverted) to the framework instead of the developer.
+
+### Overall Best Practice
+
+* Favor using Constructors
+* Make private properties final and initialize them via constructor
+* Whenever practical, use interfaces
+* Do not use DI for EVERYTHING, be pragmatical.
