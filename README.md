@@ -150,3 +150,133 @@ Within the framework it is quite common to use
 Rarely used by Spring developers themselves
 
 If you ever need them they could come in handy
+
+## HTTP
+
+### Safe Methods
+
+Cause no changes on the server, only fetches information
+* GET
+* HEAD
+* OPTIONS
+* TRACE
+
+### Idempotent Methods
+
+Idempotence - Quality of an action such that repetitions of the action have no further effect on the outcome
+* PUT
+* DELETE
+* All the safe methods (GET, HEAD, TRACE, OPTIONS) are also idempotent
+
+### Non-Idempotent Methods
+POST creates a resource whenever is called
+
+### HTTP Request Overview
+
+![http](docs/http_request_methods.png "HTTP requests")
+
+## REST
+
+Representational State Transfer (REST)
+* Representation: typically JSON or XML
+* State Transfer: typically via HTTP
+* Established by Roy Fielding from 2000 doctoral dissertation
+
+REST APIs use HTTP verbs to create, manage and delete server resources
+
+Resources are usually data structures represented by JSON or XML
+
+HTTP status codes communicate success, failure, errors
+
+REST is **not** a formal standard, more like generally agreed upon methods and techniques 
+(SOAP on the other hand **is** a standard with formal structure and a committee behind it)
+
+In the 2020s the industry does agree on how REST should be and should not be implemented. But there can be numerous cases where you need to differ from these opinions.
+
+### RESTful Terminology
+
+* Verbs - HTTP methods
+* Messages - payload of the action (JSON/XML)
+* URI - Uniform Resource Identifier
+  * Unique string identifying any resource (not necessary related to the internet)
+* URL - Uniform Resource Locator
+  * An URI with network information
+  * http://www.example.com/cars/1
+* Idempotence - You can exercise an operation multiple times without changing the result
+* Stateless - Service does not maintain any client state
+* HATEOAS - Hypermedia As The Engine of Application State
+  * REST client should be able to use hyperlinks provided by the server to discover all the available actions and resources it needs
+  * for client requests the server responds with hyperlinks to other available actions
+  * this concept is uncommon in the industry, advanced REST APIs do often use this concept
+
+### Richardson Maturity Model (RMM)
+
+**Level 0 - Swamp of POX**
+* POX: Plain Old XML
+* One URI
+* One verb
+* Ex.: RPC, SOAP, XML-RPC
+
+**Level 1 - Resources**
+* Multiple URIs which identify multiple resources
+* One verb
+
+**Level 2 - HTTP Verbs**
+* Multiple verbs with URIs for desired actions
+* Most common use of REST APIs
+
+**Level 3 - Hypermedia**
+* Response contains URIs that helps consumers explore the API
+* No clear standard for this level though
+* Spring provides its own implementation for HATEOS
+* Quite rare for now
+
+## REST in Spring
+
+Spring Framework has 2 web client (for consuming) and 3 web frameworks (for creating) RESTful services
+
+Spring Framework also has multiple libraries for RESTful services
+
+### Spring MVC (web framework) is the most commonly used library for creating RESTful services
+* Compatible with Java EE (Jakarta EE in Spring 6)
+* Based on traditional Java Servlet API
+  * However, this makes Spring MVC ***blocking*** and ***non-reactive***
+
+### Spring WebFlux (web framework)
+* Introduced with Spring Framework 5
+* Uses project Reactor
+  * Provides ***reactive*** web services
+  * Does not use Java Servlet API, so it's ***non-blocking***
+* Follows closely to the configuration model of Spring MVC
+  * Easy transition from Spring MVC
+
+### Spring WebFlux.fn (web framework)
+* Introduced with Spring Framework 5
+* Functional programming model for defining endpoints
+* Alternative to annotation based configuration
+* Rapid and simple definition of microservice endpoints
+
+### Spring RestTemplate (web client)
+* Primary library for consuming RESTful web services
+* Very mature
+* Highly configurable
+* From Spring Framework 5 it's been in maintenance mode
+  * No more new features
+  * Going to get deprecated
+  * Spring recommends ***WebClient*** for new development
+
+### WebClient (web client)
+* Introduced with Spring Framework 5
+* ***Reactive*** web client
+* By default, uses Reactor Netty, non-blocking HTTP client library
+
+### Marshalling/unmarshalling
+
+Marshalling: Process of converting POJOs to JSON or XML
+
+Unmarshalling: JSON or XML -> POJO
+
+By default, Spring Boot configures Jackson for marshalling and unmarshalling
+
+Spring Boot supports other libraries that can be used
+
