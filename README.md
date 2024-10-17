@@ -104,3 +104,49 @@ TL;DR:
 * Make private properties final and initialize them via constructor
 * Whenever practical, use interfaces
 * Do not use DI for EVERYTHING, be pragmatical.
+
+## Spring Bean Lifecycle
+
+![bean-lifecycle](docs/bean_lifecycle.png "Bean lifecycle")
+
+Terminating a bean:
+
+![bean-end](docs/bean_end_of_life.png "Bean end of life")
+
+## Callbacks
+There are 2 callback events you can use:
+* InitializingBean.afterPropertiesSet()
+  * Called after properties are set
+* DisposableBean.destroy()
+  * Called right before the bean is terminated
+
+## Annotations
+There are 2 annotations you can use to hook into the life cycle:
+* PostConstruct
+  * This runs when the bean is constructed but not returned yet to the requesting object
+* PreDestroy
+  * Called right before the bean is terminated
+
+## Bean Post Processors
+
+Enables to tap into Spring context life cycle
+
+Called for all beans in context, hence you might want to type check
+
+Implement BeanPostProcessor
+* postProcessBeforeInitialization
+* postProcessAfterInitialization
+
+These are quite uncommon to use.
+
+## Aware interfaces
+
+Spring has over 14 "aware" interfaces, they are extensions of the Aware interface
+
+These access can access the Spring Framework infrastucture
+
+Within the framework it is quite common to use
+
+Rarely used by Spring developers themselves
+
+If you ever need them they could come in handy
