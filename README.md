@@ -280,3 +280,58 @@ By default, Spring Boot configures Jackson for marshalling and unmarshalling
 
 Spring Boot supports other libraries that can be used
 
+## Project Lombok
+
+Helps to reduce boilerplate code in Java.
+
+How it works:
+* Hooks in via the annotation processor API
+* AST (raw source code) is passed to Lombok for code generation before java continues
+* Produces properly compiled Java code in conjunction with the Java compiler
+* Code is generated and compiled: no run-time performance penalty
+* If you write an implementation of a Project Lombok method, then your code will be used
+  * Easy to override Lombok generated code
+
+Older IDEs can get confused by the injected code, since the source files do not contain the methods that the compiled code has.
+
+Plugins may be necessary for certain IDEs to support Lombok.
+
+### Lombok features
+
+* val - declares final local variable
+* var - declares mutable local variable
+* @Getter
+* @Setter
+  * Creates setters for all **non-final** properties
+* @ToString
+  * String of classname + each field seperated by commas + optional parameters
+* @EqualsAndHashCode
+  * By default, uses non-static, non-transient properties
+  * Can also exclude specific properties
+* @NoArgsConstructor
+  * Error if there are any final fields
+* @RequiredArgsConstructor
+  * Generates constructor for all fields that are final or marked @NonNull
+* @Data
+  * Generates typical POJO boilerplate
+  * Combines @Getter @Setter @ToString @EqualsAndHashCode @RequiredArgsConstructor
+  * No constructor is generated if you already explicitly declared one
+* @Value
+  * Immutable variant of @Data
+  * All fields are made private and final by default
+* @NonNull
+  * Set on parameter of method or constructor
+  * NPE thrown if parameter is null
+* @Builder
+  * Creates a "builder" pattern
+* @SneakyThrows
+  * Throw checked exceptions without declaring in calling method's throws clause
+* @Synchronized
+  * Safer implementation of Java's synchronized
+* @Log
+  * Creates a Java util logger
+  * Java util loggers considered awful
+* @Slf4j
+  * Creates SLF4J logger
+  * Recommended since SLF4J is a generic logging facade
+  * Spring Boot's default logger is LogBack
