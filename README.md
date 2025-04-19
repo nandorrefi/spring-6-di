@@ -263,7 +263,7 @@ Spring Framework also has multiple libraries for RESTful services
 * From Spring Framework 5 it's been in maintenance mode
   * No more new features
   * Going to get deprecated
-  * Spring recommends ***WebClient*** for new development
+  * Spring recommends ***RestClient*** for new development
 
 ### WebClient (web client)
 * Introduced with Spring Framework 5
